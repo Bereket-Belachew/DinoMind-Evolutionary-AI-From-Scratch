@@ -30,6 +30,38 @@ def main():
             if agent.alive:
                 agent.update()
         
+        # AI decision making for each alive agent
+        for agent in population.get_all_agents():
+            if agent.alive:
+                # Dino vision (AI inputs) - provide better timing information
+                distance = config.block.x - agent.x
+                block_height = config.block.rect.height
+                block_top = config.block.y
+                agent_bottom = agent.y + 30  # Agent height is 30
+                
+                # Better inputs for timing decisions
+                time_to_collision = max(0, distance) / 2  # Frames until collision (block moves 2 pixels/frame)
+                block_height_normalized = block_height / 100  # Block height relative to max
+                clearance_needed = max(0, block_top - agent_bottom) / 100  # How much clearance needed
+                
+                inputs = [time_to_collision / 100, block_height_normalized, clearance_needed]
+                output = agent.brain.feed_forward(inputs)
+
+                # Make dino jump if output > 0.3 and dino is on ground
+                if output > 0.3 and agent.on_ground:
+                    agent.jump()
+
+        # Check collision AFTER all updates and AI decisions
+        for agent in population.get_all_agents():
+            if agent.alive:
+                # Update agent rectangle position before collision check
+                agent.rect.x = agent.x
+                agent.rect.y = agent.y
+                
+                # Check collision with improved detection
+                if agent.rect.colliderect(config.block.rect):
+                    agent.alive = False
+        
         # Draw everything
         config.ground.draw(config.window)
         config.block.draw(config.window)
@@ -38,25 +70,6 @@ def main():
         for agent in population.get_all_agents():
             if agent.alive:
                 agent.draw(config.window)
-
-        # AI decision making for each alive agent
-        for agent in population.get_all_agents():
-            if agent.alive:
-                # Dino vision (AI inputs)
-                distance = config.block.x - agent.x
-                block_height = config.block.rect.height
-                dino_y = agent.y
-
-                inputs = [distance / 550, block_height / 100, dino_y / 400]  # normalize
-                output = agent.brain.feed_forward(inputs)
-
-                # Make dino jump if output > 0.3 and dino is on ground
-                if output > 0.3 and agent.on_ground:
-                    agent.jump()
-
-                # Check collision
-                if agent.rect.colliderect(config.block.rect):
-                    agent.alive = False
 
         # Update fitness based on current block position
         population.update_fitness(config.block.x)

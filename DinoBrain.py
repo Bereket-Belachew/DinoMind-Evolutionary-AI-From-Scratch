@@ -10,15 +10,15 @@ class DinoBrain:
         self.connections=[]
         #Lets create the connections between the nodes with better initial weights:
         for i, nod in enumerate(self.input_nodes +[self.bias_node]):
-            # Give better initial weights - distance should trigger jumps when close
-            if i == 0:  # distance input
-                weight = random.uniform(2, 5)  # Positive weight for distance
+            # Give better initial weights based on input meaning
+            if i == 0:  # time_to_collision input (higher = more time, lower = less time)
+                weight = random.uniform(-3, -1)  # Negative weight - less time = more likely to jump
             elif i == 1:  # block height input  
-                weight = random.uniform(-2, 2)  # Mixed weight for height
-            elif i == 2:  # dino y position
-                weight = random.uniform(-1, 1)  # Small weight for position
+                weight = random.uniform(-0.5, 0.5)  # Small weight for height
+            elif i == 2:  # clearance needed input
+                weight = random.uniform(1, 3)  # Positive weight - more clearance needed = more likely to jump
             else:  # bias node
-                weight = random.uniform(-3, -1)  # Negative bias to prevent constant jumping
+                weight = random.uniform(-1, 0)  # Small negative bias to prevent constant jumping
                 
             conn = Connection.Connection(nod,self.output_node,weight)
             nod.connections.append(conn)
@@ -32,9 +32,9 @@ class DinoBrain:
     
     def mutate(self):
         for conn in self.connections:
-            if random.random() < 0.1:  # 10% chance per connection
-                conn.weight += random.gauss(0, 0.5)
-                conn.weight = max(min(conn.weight, 5), -5)
+            if random.random() < 0.3:  # 30% chance per connection for more diversity
+                conn.weight += random.gauss(0, 0.8)  # Larger mutations
+                conn.weight = max(min(conn.weight, 8), -8)  # Wider weight range
     def feed_forward(self,inputs):
         for i, val in enumerate(inputs):
             self.input_nodes[i].output_value=val
