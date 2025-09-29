@@ -19,7 +19,7 @@ The dinosaur uses a neural network with 3 inputs:
 - Current vertical position
 
 The AI makes jumping decisions based on these inputs, and the population evolves over generations to improve performance.
-![Dino Game Screenshot](Screenshot%202025-09-29%20at%2016.21.43.png)
+![Dino Game Screenshot](Screenshot 2025-09-29 at 16.21.51.png)
 ## Files Structure
 
 - `main.py` - Main game loop and NEAT implementation
