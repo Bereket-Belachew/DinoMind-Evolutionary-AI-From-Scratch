@@ -10,7 +10,7 @@ A Pygame-based jumping dinosaur game where the dinosaur learns to jump over obst
 - **Real-time Learning**: AI evolves through generations to improve performance
 - **Dynamic Obstacles**: Randomly generated block heights and positions
 
-![Dino Game Screenshot](Screenshot%202025-09-29%20at%2016.21.43.png)
+![Dino Game Screenshot](Screenshot 2025-09-29 at 16.21.51.png)
 ## How It Works
 
 The dinosaur uses a neural network with 3 inputs:
