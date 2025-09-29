@@ -9,7 +9,8 @@ A Pygame-based jumping dinosaur game where the dinosaur learns to jump over obst
 - **Population Management**: Tracks multiple species and their performance
 - **Real-time Learning**: AI evolves through generations to improve performance
 - **Dynamic Obstacles**: Randomly generated block heights and positions
-![Alt text](Screenshot 2025-09-29 at 16.21.43.png)
+- ![Alt text](Screenshot 2025-09-29 at 16.21.43.png)
+![Alt text]()
 ## How It Works
 
 The dinosaur uses a neural network with 3 inputs:
