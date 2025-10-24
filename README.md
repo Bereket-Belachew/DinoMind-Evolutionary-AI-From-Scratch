@@ -1,6 +1,6 @@
 🦖 Jumping Dinosaur Game with NEAT AI : First Let me explain why I love this project🫡
 
-**Please Clicck me  https://www.loom.com/share/6eb361d4b70c4f3b94a0254244e62d41?sid=c1e4abf3-ae72-43ff-ae53-df93c1c91ab3**
+**Please Click me  https://www.loom.com/share/6eb361d4b70c4f3b94a0254244e62d41?sid=c1e4abf3-ae72-43ff-ae53-df93c1c91ab3**
 
 Hi, I’m Bereket, and this is my little side project that turned into something… kinda cool.
 I wanted to see if I could teach a dinosaur to jump over obstacles — without hardcoding the rules, and without relying on big machine learning libraries like TensorFlow or PyTorch. Just pure Python, math, and stubbornness.
